@@ -6,4 +6,5 @@ export type Clothes = {
   category: string;
   tags: string[];
   wornCount: number;
+  createdAt: string;
 };
