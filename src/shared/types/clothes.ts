@@ -1,5 +1,5 @@
 export type Clothes = {
-  id: number;
+  id: string;
   image: string;
   brand: string;
   name: string;
