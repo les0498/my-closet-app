@@ -9,29 +9,31 @@ export default function DonutChart({ data }: { data: { tag: string; percent: num
   const cy = 80;
   const circumference = 2 * Math.PI * radius;
 
-  let cumulative = 0;
+  const segments = data.map((item, i) => {
+    const prevPercent = data.slice(0, i).reduce((acc, cur) => acc + cur.percent, 0);
+
+    return {
+      ...item,
+      dashArray: (item.percent / 100) * circumference,
+      dashOffset: circumference - (prevPercent / 100) * circumference,
+    };
+  });
 
   return (
     <svg width={160} height={160}>
-      {data.map((item, i) => {
-        const dashArray = (item.percent / 100) * circumference;
-        const dashOffset = circumference - (cumulative * circumference) / 100;
-        cumulative += item.percent;
-
-        return (
-          <circle
-            key={item.tag}
-            cx={cx}
-            cy={cy}
-            r={radius}
-            fill="none"
-            stroke={COLORS[i % COLORS.length]}
-            strokeWidth={stroke}
-            strokeDasharray={`${dashArray} ${circumference - dashArray}`}
-            strokeDashoffset={dashOffset}
-          />
-        );
-      })}
+      {segments.map((item, i) => (
+        <circle
+          key={item.tag}
+          cx={cx}
+          cy={cy}
+          r={radius}
+          fill="none"
+          stroke={COLORS[i % COLORS.length]}
+          strokeWidth={stroke}
+          strokeDasharray={`${item.dashArray} ${circumference - item.dashArray}`}
+          strokeDashoffset={item.dashOffset}
+        />
+      ))}
     </svg>
   );
 }
