@@ -8,3 +8,5 @@ export type Clothes = {
   wornCount: number;
   createdAt: string;
 };
+
+export type CreateClothesInput = Omit<Clothes, 'id' | 'wornCount' | 'createdAt'>;
