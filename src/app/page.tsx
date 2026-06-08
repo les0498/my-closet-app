@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function Home() {
       <p className="text-lg">오늘 뭐 입었나?</p>
 
       <button
-        onClick={() => router.push("/closet")}
+        onClick={() => router.push('/closet')}
         className="px-6 py-3 bg-black text-white rounded-xl"
       >
         기록하기

@@ -1,8 +1,8 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+'use client';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-const STYLE_TAGS = ["캐주얼", "스트릿", "미니멀", "포멀", "스포티", "빈티지"];
+const STYLE_TAGS = ['캐주얼', '스트릿', '미니멀', '포멀', '스포티', '빈티지'];
 
 export default function AddClothesPage() {
   const router = useRouter();
@@ -63,8 +63,8 @@ export default function AddClothesPage() {
                 onClick={() => toggleTag(tag)}
                 className={`px-3 py-1.5 rounded-full text-sm border transition ${
                   selectedTags.includes(tag)
-                    ? "bg-black text-white border-black"
-                    : "bg-white text-gray-500 border-gray-300"
+                    ? 'bg-black text-white border-black'
+                    : 'bg-white text-gray-500 border-gray-300'
                 }`}
               >
                 {tag}

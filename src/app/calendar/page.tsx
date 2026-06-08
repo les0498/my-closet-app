@@ -1,45 +1,48 @@
-"use client";
-import { useState } from "react";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { ko } from "date-fns/locale";
+'use client';
+import { useState } from 'react';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+import { ko } from 'date-fns/locale';
 
-const mockRecords: Record<string, { image: string; brand: string; name: string; category: string }[]> = {
-  "2026-04-21": [
+const mockRecords: Record<
+  string,
+  { image: string; brand: string; name: string; category: string }[]
+> = {
+  '2026-04-21': [
     {
-      image: "https://via.placeholder.com/150",
-      brand: "코드그라피",
-      name: "체크 토마토 링거 반소매 티셔츠",
-      category: "상의",
+      image: 'https://via.placeholder.com/150',
+      brand: '코드그라피',
+      name: '체크 토마토 링거 반소매 티셔츠',
+      category: '상의',
     },
     {
-      image: "https://via.placeholder.com/150",
-      brand: "코드그라피",
-      name: "체크 패치 버뮤다 트레이닝 쇼츠",
-      category: "하의",
+      image: 'https://via.placeholder.com/150',
+      brand: '코드그라피',
+      name: '체크 패치 버뮤다 트레이닝 쇼츠',
+      category: '하의',
     },
   ],
-  "2026-04-18": [
+  '2026-04-18': [
     {
-      image: "https://via.placeholder.com/150",
-      brand: "코드그라피",
-      name: "체크 토마토 링거 반소매 티셔츠",
-      category: "상의",
+      image: 'https://via.placeholder.com/150',
+      brand: '코드그라피',
+      name: '체크 토마토 링거 반소매 티셔츠',
+      category: '상의',
     },
   ],
 };
 
 function toKey(date: Date) {
   const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
   return `${y}-${m}-${d}`;
 }
 
 export default function CalendarPage() {
   const [selected, setSelected] = useState<Date | undefined>(new Date());
 
-  const selectedKey = selected ? toKey(selected) : "";
+  const selectedKey = selected ? toKey(selected) : '';
   const records = mockRecords[selectedKey] ?? [];
   const markedDays = Object.keys(mockRecords).map((d) => new Date(d));
 
@@ -57,8 +60,8 @@ export default function CalendarPage() {
           modifiers={{ marked: markedDays }}
           modifiersStyles={{
             marked: {
-              fontWeight: "bold",
-              textDecoration: "underline",
+              fontWeight: 'bold',
+              textDecoration: 'underline',
             },
           }}
         />
@@ -69,13 +72,11 @@ export default function CalendarPage() {
         <h2 className="text-sm font-semibold text-gray-500 mb-3">
           {selected
             ? `${selected.getMonth() + 1}월 ${selected.getDate()}일 착용`
-            : "날짜를 선택하세요"}
+            : '날짜를 선택하세요'}
         </h2>
 
         {records.length === 0 ? (
-          <div className="text-center text-gray-400 text-sm py-10">
-            기록된 착용 정보가 없어요
-          </div>
+          <div className="text-center text-gray-400 text-sm py-10">기록된 착용 정보가 없어요</div>
         ) : (
           <div className="flex flex-col gap-3">
             {records.map((item, i) => (
