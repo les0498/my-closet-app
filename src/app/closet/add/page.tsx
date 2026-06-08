@@ -1,21 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
-const STYLE_TAGS = ["캐주얼", "스트릿", "미니멀", "포멀", "스포티", "빈티지"];
 
 export default function AddClothesPage() {
   const router = useRouter();
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-  };
 
   return (
-    <main className="p-6 pb-24">
+    <main className="p-6">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => router.back()} className="text-sm text-gray-500">
           ← 뒤로
@@ -52,26 +42,6 @@ export default function AddClothesPage() {
           <option value="신발">신발</option>
           <option value="액세서리">액세서리</option>
         </select>
-
-        {/* 스타일 태그 */}
-        <div>
-          <p className="text-sm text-gray-500 mb-2">스타일 태그</p>
-          <div className="flex flex-wrap gap-2">
-            {STYLE_TAGS.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                className={`px-3 py-1.5 rounded-full text-sm border transition ${
-                  selectedTags.includes(tag)
-                    ? "bg-black text-white border-black"
-                    : "bg-white text-gray-500 border-gray-300"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
 
         {/* 등록 버튼 */}
         <button className="bg-black text-white rounded-full py-3 text-sm font-semibold mt-2">
