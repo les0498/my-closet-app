@@ -1,31 +1,34 @@
-import {clothes} from "@/types/clothes.ts"
+import { Clothes } from '../shared/types/clothes';
 
-export const clothesMock = [
+export const clothesMock: Clothes[] = [
   {
-    id: 1,
-    image: "https://via.placeholder.com/150",
-    brand: "코드그라피",
-    name: "체크 토마토 링거 반소매 티셔츠",
-    category: "상의",
-    tags: ["캐주얼", "스트릿"],  
+    id: '1',
+    image: 'https://example.com/image1.jpg',
+    brand: 'Brand A',
+    name: 'T-Shirt',
+    category: 'Top',
+    tags: ['casual', 'summer'],
+    wornCount: 5,
+    createdAt: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: '2',
+    image: 'https://example.com/image2.jpg',
+    brand: 'Brand B',
+    name: 'Jeans',
+    category: 'Bottom',
+    tags: ['denim', 'casual'],
     wornCount: 3,
+    createdAt: '2024-02-01T00:00:00Z',
   },
   {
-    id: 2,
-    image: "https://via.placeholder.com/150",
-    brand: "코드그라피",
-    name: "체크 패치 버뮤다 트레이닝 쇼츠",
-    category: "하의",
-    tags: ["스포티"],
-    wornCount: 1,
-  },
-  {
-    id: 3,
-    image: "https://via.placeholder.com/150",
-    brand: "코드그라피",
-    name: "오버핏 후드 집업",
-    category: "아우터",
-    tags: ["미니멀", "캐주얼"],
-    wornCount: 0,
+    id: '3',
+    image: 'https://example.com/image3.jpg',
+    brand: 'Brand C',
+    name: 'Jacket',
+    category: 'Outerwear',
+    tags: ['winter', 'warm'],
+    wornCount: 2,
+    createdAt: '2024-03-01T00:00:00Z',
   },
 ];
