@@ -1,4 +1,5 @@
 'use client';
+import { useClothesStore } from '@/features/clothes/store/clothesStore';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -6,12 +7,37 @@ const STYLE_TAGS = ['캐주얼', '스트릿', '미니멀', '포멀', '스포티'
 
 export default function AddClothesPage() {
   const router = useRouter();
+  const addClothes = useClothesStore((state) => state.addClothes);
+
+  const [brand, setBrand] = useState('');
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
     );
+  };
+
+  const handleSubmit = () => {
+    const trimmedBrand = brand.trim();
+    const trimmedName = name.trim();
+
+    if (!trimmedName || !category) {
+      alert('상품명과 카테고리를 입력해주세요.');
+      return;
+    }
+
+    addClothes({
+      brand: trimmedBrand,
+      name: trimmedName,
+      category,
+      tags: selectedTags,
+      image: '',
+    });
+
+    router.push('/closet');
   };
 
   return (
@@ -31,6 +57,8 @@ export default function AddClothesPage() {
 
         {/* 브랜드 */}
         <input
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
           type="text"
           placeholder="브랜드"
           className="border rounded-lg px-4 py-2 text-sm w-full"
@@ -38,13 +66,19 @@ export default function AddClothesPage() {
 
         {/* 상품명 */}
         <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           type="text"
           placeholder="상품명"
           className="border rounded-lg px-4 py-2 text-sm w-full"
         />
 
         {/* 카테고리 */}
-        <select className="border rounded-lg px-4 py-2 text-sm w-full">
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="border rounded-lg px-4 py-2 text-sm w-full"
+        >
           <option value="">카테고리 선택</option>
           <option value="상의">상의</option>
           <option value="하의">하의</option>
@@ -59,6 +93,7 @@ export default function AddClothesPage() {
           <div className="flex flex-wrap gap-2">
             {STYLE_TAGS.map((tag) => (
               <button
+                type="button"
                 key={tag}
                 onClick={() => toggleTag(tag)}
                 className={`px-3 py-1.5 rounded-full text-sm border transition ${
@@ -74,7 +109,11 @@ export default function AddClothesPage() {
         </div>
 
         {/* 등록 버튼 */}
-        <button className="bg-black text-white rounded-full py-3 text-sm font-semibold mt-2">
+        <button
+          type="button"
+          onClick={handleSubmit}
+          className="bg-black text-white rounded-full py-3 text-sm font-semibold mt-2"
+        >
           등록하기
         </button>
       </div>

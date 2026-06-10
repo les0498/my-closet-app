@@ -1,11 +1,13 @@
 'use client';
 import ClothesCard from '@/components/ClothesCard';
-import { clothesMock } from '@/mocks/clothes';
 import { useRouter } from 'next/navigation';
 import { Plus } from 'lucide-react';
+import { useClothesStore } from '@/features/clothes/store/clothesStore';
 
 export default function ClosetPage() {
   const router = useRouter();
+  const clothes = useClothesStore((state) => state.clothes);
+
   return (
     <main className="p-6">
       {/* 헤더 */}
@@ -29,7 +31,7 @@ export default function ClosetPage() {
           <Plus size={28} />
           <span className="text-sm mt-1">옷 추가</span>
         </div>
-        {clothesMock.map((item) => (
+        {clothes.map((item) => (
           <ClothesCard
             key={item.id}
             image={item.image}
